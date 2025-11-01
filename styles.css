@@ -1,65 +1,49 @@
-/* ================================
-   Base reset & variables (LIGHT)
-   ================================ */
+/* ============ Base / variables ============ */
 :root{
-  --bg:#e6e6e6;      /* page background */
-  --ink:#111;        /* main text */
-  --muted:#555;      /* secondary text */
-  --brand:#0047ab;   /* logo blue */
-  --accent:#e60000;  /* logo red */
-  --card:#ffffff;    /* cards/sections */
-  --ring:#0047ab33;  /* subtle blue focus ring/shadow */
+  --bg:#e6e6e6;
+  --ink:#111;
+  --muted:#555;
+  --brand:#0047ab;
+  --accent:#e60000;
+  --card:#ffffff;
+  --ring:#0047ab33;
 }
 
 *{ box-sizing:border-box }
 html,body{ margin:0; padding:0 }
-
 body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.6;
+  background:var(--bg); color:var(--ink); line-height:1.6;
 }
-
 img,video{ max-width:100%; display:block; border-radius:12px }
-
 a{ color:var(--brand); text-decoration:none; font-weight:500 }
 a:hover{ color:var(--accent); text-decoration:underline }
 a:focus-visible{ outline:3px solid var(--ring); border-radius:8px; outline-offset:2px }
 
 small.small{ font-size:.9rem }
-
-/* ================================
-   Layout / Header / Nav
-   ================================ */
 .container{ max-width:1100px; margin:0 auto; padding:0 1.25rem }
 
-.site-header{
-  background:#f5f5f5;
-  border-bottom:1px solid #e5e7eb;
-}
-
-.nav{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 0;
-}
-
-.brand{ display:flex; align-items:center; gap:.5rem; font-weight:700; color:#0047ab }
+/* ============ Header / Nav ============ */
+.site-header{ background:#f5f5f5; border-bottom:1px solid #e5e7eb }
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+.brand{ display:flex; align-items:center; gap:.55rem; font-weight:700; color:#0047ab; padding-left:.25rem }
 .brand strong{ color:#e60000 }
-.brand .logo{ font-size:1.25rem }
+.brand .logo img{ width:28px; height:28px; border-radius:0; object-fit:cover }
+/* extra breathing room on small screens so the icon never hugs the edge */
+@media (max-width:480px){
+  .site-header .container{ padding-left:18px; padding-right:16px }
+  .brand{ padding-left:.35rem }
+}
 
 .nav-links{ display:flex; gap:1rem; list-style:none; margin:0; padding:0 }
 .nav-links a{ padding:.5rem .75rem; border-radius:8px; color:#0047ab }
 .nav-links a:hover{ background:#eaf1ff }
-
 .nav-toggle{
   display:none; background:none; border:1px solid #cbd5e1; color:#0f172a;
   border-radius:8px; padding:.4rem .6rem;
 }
 
-/* ================================
-   Hero
-   ================================ */
+/* ============ Hero ============ */
 .hero{
   display:grid; gap:2rem; grid-template-columns:1.1fr .9fr; align-items:center;
   padding:2.5rem 0 3rem;
@@ -71,7 +55,6 @@ small.small{ font-size:.9rem }
   box-shadow:0 4px 14px rgba(0,0,0,.15); border:4px solid #f4f4f4;
 }
 
-/* Buttons */
 .cta{ display:flex; gap:.75rem; flex-wrap:wrap }
 .btn{
   display:inline-block; padding:.7rem 1rem; border-radius:10px;
@@ -85,9 +68,7 @@ small.small{ font-size:.9rem }
 .btn-outline{ background:transparent; color:var(--brand); border:2px solid var(--brand) }
 .btn-outline:hover{ background:var(--brand); color:#fff }
 
-/* ================================
-   Section containers
-   ================================ */
+/* ============ Section shells ============ */
 section.container{
   background:#fff; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.08);
   padding:2rem; margin:2rem auto;
@@ -95,503 +76,110 @@ section.container{
 .about,.schedule,.gallery,.contact{ padding:2.25rem 0 }
 .about h2,.gallery h2,.contact h2,.schedule h2{ font-size:1.6rem; margin:.2rem 0 1rem }
 
-/* ================================
-   ABOUT – polished, minimal
-   ================================ */
+/* ============ About cards ============ */
+.about h2{ border-bottom:2px solid rgba(0,71,171,.15); padding-bottom:.4rem; margin-bottom:1rem }
+.features{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; align-items:stretch; margin-top:1.5rem }
+@media (max-width:900px){ .features{ grid-template-columns:1fr } }
 
-/* Title divider: subtle structure */
-.about h2{
-  border-bottom: 2px solid rgba(0, 71, 171, 0.15);
-  padding-bottom: .4rem;
-  margin-bottom: 1rem;
-}
-
-/* Balanced grid: 2×2 on desktop, 1× on mobile */
-.features{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-  align-items: stretch;
-  margin-top: 1.5rem;
-}
-@media (max-width: 900px){
-  .features{ grid-template-columns: 1fr; }
-}
-
-/* Final Polished Card Style (subtle, premium hover) */
 .card{
-  background:#fff;
-  border:1px solid rgba(0, 71, 171, 0.12);          /* faint brand tint */
-  border-radius:16px;
-  padding:1.5rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  height:100%;
-  box-shadow:0 2px 6px rgba(0,0,0,0.04);            /* soft base shadow */
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
-              box-shadow 0.3s cubic-bezier(0.4,0,0.2,1),
-              border-color 0.3s ease;
-}
-.card:hover{
-  transform: translateY(-3px);
-  border-color: rgba(0, 71, 171, 0.25);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-}
-@media (prefers-reduced-motion: reduce){
-  .card, .sched-card{ transition:none }
-  .card:hover, .sched-card:hover{ transform:none; box-shadow:inherit }
-}
-
-/* Card text polish */
-.card h3{
-  margin: 0 0 .6rem;
-  color: #111;
-  font-weight: 600;
-}
-.card p{
-  color: #333;
-  font-size: .97rem;
-  line-height: 1.55;
-  margin: .4rem 0;
-}
-
-/* Motto line */
-.motto{
-  font-style: italic;
-  font-weight: 500;
-  color:#003b91;                   /* deeper brand blue */
-  border-left:3px solid var(--brand);
-  padding-left:.75rem;
-  margin:1rem 0 1.5rem;
-  letter-spacing:.2px;
-}
-
-/* ================================
-   Schedule
-   ================================ */
-/* (Legacy table styles kept, in case you re-use) */
-.schedule .table-wrap{ overflow:auto; border:1px solid #e5e7eb; border-radius:14px }
-.schedule-table{ width:100%; border-collapse:collapse }
-.schedule-table th,.schedule-table td{
-  padding:.75rem; border-bottom:1px solid #e5e7eb; text-align:center; color:#111;
-}
-.schedule-table thead th{ background:#f3f4f6 }
-
-/* ---------- Minimal Card Schedule ---------- */
-.schedule .muted{ color: var(--muted); margin-top:.25rem }
-
-.schedule-cards{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap:1.25rem;
-  margin-top:1rem;
-  align-items:stretch;                    /* ensure equal row height */
-}
-@media (max-width:900px){
-  .schedule-cards{ grid-template-columns: 1fr; }
-}
-
-.sched-card{
-  background:#fff;
-  border:1px solid rgba(0, 71, 171, 0.12);
-  border-radius:16px;
-  padding:1.25rem 1.5rem;
+  background:#fff; border:1px solid rgba(0,71,171,.12); border-radius:16px;
+  padding:1.5rem; display:flex; flex-direction:column; justify-content:space-between; height:100%;
   box-shadow:0 2px 6px rgba(0,0,0,.04);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  height:100%;                            /* fill grid track */
-  display:flex;                           /* equalize internal layout */
-  flex-direction:column;
+  transition:transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1), border-color .3s;
 }
-.sched-card:hover{
-  transform: translateY(-3px);
-  border-color: rgba(0, 71, 171, 0.25);
-  box-shadow:0 8px 20px rgba(0,0,0,.06);
+.card:hover{ transform:translateY(-3px); border-color:rgba(0,71,171,.25); box-shadow:0 8px 20px rgba(0,0,0,.06) }
+.card h3{ margin:0 0 .6rem; color:#111; font-weight:600 }
+.card p{ color:#333; font-size:.97rem; line-height:1.55; margin:.4rem 0 }
+
+.motto{
+  font-style:italic; font-weight:500; color:#003b91;
+  border-left:3px solid var(--brand); padding-left:.75rem; margin:1rem 0 1.5rem; letter-spacing:.2px;
 }
 
-.sched-card h3{
-  margin:.1rem 0 .15rem;
-  font-size:1.1rem;
-  color:#111;
-  font-weight:700;
-  letter-spacing:.2px;
+/* ============ Schedule cards ============ */
+.schedule .muted{ color:var(--muted); margin-top:.25rem }
+.schedule-cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; margin-top:1rem; align-items:stretch }
+@media (max-width:900px){ .schedule-cards{ grid-template-columns:1fr } }
+.sched-card{
+  background:#fff; border:1px solid rgba(0,71,171,.12); border-radius:16px;
+  padding:1.25rem 1.5rem; box-shadow:0 2px 6px rgba(0,0,0,.04);
+  transition:transform .25s, box-shadow .25s, border-color .25s; height:100%; display:flex; flex-direction:column;
 }
-.sched-card .sub{
-  margin:0 0 .85rem;
-  color:#666;
-  font-size:.95rem;
-}
-
-.time-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.5rem;
-  margin-top:auto;                         /* pushes chips to the bottom for equal visual height */
-}
+.sched-card:hover{ transform:translateY(-3px); border-color:rgba(0,71,171,.25); box-shadow:0 8px 20px rgba(0,0,0,.06) }
+.sched-card h3{ margin:.1rem 0 .15rem; font-size:1.1rem; color:#111; font-weight:700; letter-spacing:.2px }
+.sched-card .sub{ margin:0 0 .85rem; color:#666; font-size:.95rem }
+.time-chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:auto }
 .chip{
-  display:inline-flex;
-  align-items:center;
-  padding:.4rem .7rem;
-  border-radius:999px;
-  background: rgba(0, 71, 171, 0.08);      /* brand-tinted pill */
-  color:#0f1a2a;
-  font-weight:600;
-  font-size:.95rem;
-  border:1px solid rgba(0, 71, 171, 0.18);
-  letter-spacing:.2px;
+  display:inline-flex; align-items:center; padding:.4rem .7rem; border-radius:999px;
+  background:rgba(0,71,171,.08); color:#0f1a2a; font-weight:600; font-size:.95rem; border:1px solid rgba(0,71,171,.18); letter-spacing:.2px;
 }
 .chip:hover{ background:rgba(0,71,171,.12) }
-.chip:focus-visible{ outline:3px solid var(--ring); }
 
-/* ================================
-   Gallery (Polished + Soft Zoom Effect)
-   ================================ */
-.gallery .muted {
-  color: var(--muted);
-  margin-bottom: .6rem;
+/* ============ Gallery ============ */
+.gallery .muted{ color:var(--muted); margin-bottom:.6rem }
+/* One clean definition: 3 cols desktop, 2 cols tablet, 1 col phones, with a minimum width for readable captions */
+.grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:.8rem; align-items:start }
+@media (max-width:1000px){ .grid{ grid-template-columns:repeat(2, minmax(280px,1fr)) } }
+@media (max-width:700px){  .grid{ grid-template-columns:1fr } }
+
+.tile{
+  position:relative; border-radius:14px; overflow:hidden; border:1px solid #e5e7eb; background:#fff;
+  display:flex; flex-direction:column; box-shadow:0 2px 6px rgba(0,0,0,.04); transition:transform .25s, box-shadow .25s;
 }
+.tile:hover{ transform:translateY(-3px); box-shadow:0 6px 14px rgba(0,0,0,.08) }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: .8rem;
-  align-items: start;
+.tile img, .tile video{
+  width:100%; display:block; border-bottom:1px solid #f0f0f0; border-radius:12px 12px 0 0;
+  object-fit:cover;
 }
+.tile video{ aspect-ratio:16/9; border-bottom:none }
 
-/* Each image or video tile */
-.tile {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
-  transition: transform .25s ease, box-shadow .25s ease;
+.tile figcaption{
+  padding:.7rem .9rem 1rem; font-size:.95rem; color:#333; line-height:1.45; text-align:center; background:#fff; border-top:1px solid #f3f4f6;
+}
+.tile .badge{
+  position:absolute; right:8px; bottom:8px; background:#ffffffee; border:1px solid #e5e7eb; padding:.25rem .5rem;
+  border-radius:8px; font-size:.8rem; color:#111; font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,.08);
 }
 
-.tile:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+/* ============ Reviews ============ */
+.reviews{ padding:2.25rem 0 }
+.reviews h2{ font-size:1.6rem; margin:.2rem 0 1rem }
+.reviews .muted{ color:#666 }
+.reviews-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem }
+@media (max-width:900px){ .reviews-grid{ grid-template-columns:1fr } }
+.review-card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:1rem 1.25rem;
+  box-shadow:0 2px 10px rgba(0,0,0,.05); transition:transform .25s, box-shadow .25s;
 }
+.review-card:hover{ transform:translateY(-3px); box-shadow:0 6px 14px rgba(0,0,0,.08) }
+.stars{ color:#f5b301; font-size:1rem; letter-spacing:.1rem; margin-bottom:.5rem }
+.quote{ margin:.5rem 0 0; color:#333; font-style:italic; line-height:1.5 }
+.reviewer{ margin:.6rem 0 0; color:#666; font-size:.95rem; font-weight:600 }
 
-/* Images and videos */
-.tile img,
-.tile video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-bottom: 1px solid #f0f0f0;
-  border-radius: 12px 12px 0 0;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-/* ✅ Gentle zoom effect (images only) */
-.tile:hover img {
-  transform: scale(1.04);
-}
-
-/* Captions under each photo */
-.tile figcaption {
-  padding: .55rem .75rem .7rem;
-  font-size: .88rem;
-  color: #555;
-  line-height: 1.4;
-  text-align: center;
-  background: #fff;
-  border-top: 1px solid #f3f4f6;
-  border-radius: 0 0 12px 12px;
-}
-
-/* Video badge */
-.tile .badge {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  background: #ffffffee;
-  border: 1px solid #e5e7eb;
-  padding: .25rem .5rem;
-  border-radius: 8px;
-  font-size: .8rem;
-  color: #111;
-  font-weight: 600;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
-}
-
-/* Lightbox */
-dialog#lightbox {
-  width: min(920px, 92vw);
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 0;
-}
-
-#lightbox .close {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  background: #f5f5f5;
-  border: 1px solid #e5e7eb;
-  color: #111;
-  border-radius: 999px;
-  width: 36px;
-  height: 36px;
-}
-
-#lightbox .content {
-  padding: 14px;
-}
-
-/* Responsive design */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .tile figcaption {
-    font-size: .82rem;
-    padding: .45rem .5rem .6rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-/* ================================
-   Gallery (photos + short videos)
-   ================================ */
-.gallery .muted {
-  color: var(--muted);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 1rem;
-}
-
-.tile {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.tile:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-}
-
-/* Images & videos */
-.tile img,
-.tile video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-bottom: 1px solid #e5e7eb;
-  border-radius: 14px 14px 0 0;
-  object-fit: cover;
-}
-
-/* Captions */
-.tile figcaption {
-  padding: 0.75rem 1rem 1rem;
-  font-size: 0.9rem;
-  color: #333;
-  text-align: center;
-  line-height: 1.4;
-}
-
-/* Small overlay badge (e.g. ▶︎ 0:30) */
-.tile .badge {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #e5e7eb;
-  padding: 0.25rem 0.45rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  color: #111;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-/* Videos slightly taller for balance */
-.tile.video video {
-  aspect-ratio: 16 / 9;
-  border-bottom: none;
-}
-
-/* Responsive tweaks */
-@media (max-width: 700px) {
-  .tile figcaption {
-    font-size: 0.85rem;
-    padding: 0.6rem 0.8rem 0.9rem;
-  }
-}
-
-/* ================================
-   Gallery SEO Enhancements
-   ================================ */
-
-/* Subtle figcaption improvements */
-.tile figcaption {
-  padding: 0.8rem 1rem 1rem;
-  font-size: 0.92rem;
-  color: #333;
-  text-align: center;
-  line-height: 1.45;
-  font-style: italic;
-}
-
-/* For videos — ensure consistent appearance */
-.tile.video {
-  border: 1px solid rgba(0, 71, 171, 0.15);
-}
-
-.tile.video figcaption {
-  background: #f8f9ff;
-  border-top: 1px solid rgba(0, 71, 171, 0.1);
-}
-
-/* Light hover accent for engagement */
-.tile:hover figcaption {
-  color: var(--brand);
-  transition: color 0.3s ease;
-}
-
-/* ================================
-   Google Reviews
-   ================================ */
-.reviews {
-  padding: 2.25rem 0;
-}
-.reviews h2 {
-  font-size: 1.6rem;
-  margin: .2rem 0 1rem;
-}
-.reviews .muted {
-  color: #666;
-}
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-@media (max-width: 900px) {
-  .reviews-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.review-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 1rem 1.25rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.review-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-}
-.stars {
-  color: #f5b301;
-  font-size: 1rem;
-  letter-spacing: .1rem;
-  margin-bottom: .5rem;
-}
-.quote {
-  margin: .5rem 0 0;
-  color: #333;
-  font-style: italic;
-  line-height: 1.5;
-}
-.reviewer {
-  margin: .6rem 0 0;
-  color: #666;
-  font-size: .95rem;
-  font-weight: 600;
-}
-
-
-/* ================================
-   Contact
-   ================================ */
-.contact-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;
-}
-.contact-card,.qr-card{
-  background:var(--card); border:1px solid #e5e7eb; border-radius:14px; padding:1rem;
-}
+/* ============ Contact ============ */
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.5rem }
+@media (max-width:900px){ .contact-grid{ grid-template-columns:1fr } }
+.contact-card,.qr-card{ background:var(--card); border:1px solid #e5e7eb; border-radius:14px; padding:1rem }
 .contact-list{ list-style:none; margin:.4rem 0 0; padding:0 }
 .contact-list li{ padding:.25rem 0 }
 .big{ font-size:1.1rem }
-
-/* Spacing around key lines */
-.contact-card > p.big{ margin-bottom:1.25rem !important }
-.contact-card p{ margin-top:.75rem; margin-bottom:.75rem }
-.contact-card > p:last-of-type{
-  margin-top:1.75rem !important;
-  font-size:1.05rem; color:#333; letter-spacing:.2px;
-}
-
-/* QR block centered */
 .qr-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center }
 .qr-card img{ display:block; margin:0 auto 1rem }
 
-/* ================================
-   Footer (final refined)
-   ================================ */
-.site-footer{
-  border-top:1px solid #e5e7eb;
-  margin-top:2.75rem;
-  background:#fafafa;
-}
-.footer-inner{
-  padding:1rem 1rem;
-  text-align:center;
-}
-.footer-inner p{
-  margin:0;
-  color:#444;
-  font-size:.93rem;
-  line-height:1.4;
-}
-.footer-inner em{
-  color:#0047ab;
-  font-style:italic;
-  font-weight:600;
-  letter-spacing:.15px;
-}
+/* ============ Footer ============ */
+.site-footer{ border-top:1px solid #e5e7eb; margin-top:2.75rem; background:#fafafa }
+.footer-inner{ padding:1rem 1rem; text-align:center }
+.footer-inner p{ margin:0; color:#444; font-size:.93rem; line-height:1.4 }
+.footer-inner em{ color:#0047ab; font-style:italic; font-weight:600; letter-spacing:.15px }
 
-/* ================================
-   Responsive
-   ================================ */
+/* ============ Responsive nav ============ */
 @media (max-width:900px){
   .hero{ grid-template-columns:1fr }
-  .grid{ grid-template-columns:1fr 1fr }
-  .contact-grid{ grid-template-columns:1fr }
-
   .nav-toggle{ display:inline-block }
   .nav-links{
-    display:none; position:absolute; right:1rem; top:56px;
-    background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:.5rem;
+    display:none; position:absolute; right:1rem; top:56px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:.5rem;
   }
   .nav-links[data-open="true"]{ display:block }
-
   .hero img{ max-height:none }
 }
