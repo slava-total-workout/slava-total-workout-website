@@ -48,8 +48,16 @@ small.small{ font-size:.9rem }
   display:grid; gap:2rem; grid-template-columns:1.1fr .9fr; align-items:center;
   padding:2.5rem 0 3rem;
 }
-.hero h1{ font-size:clamp(1.8rem,3.6vw,3rem); line-height:1.15; margin:0 0 .5rem }
-.hero p{ color:var(--muted); max-width:56ch; margin:0 0 1.25rem }
+.hero h1{ font-size:clamp(1.9rem,3.7vw,3.15rem); line-height:1.12; margin:0 0 .45rem }
+.hero p{ color:var(--muted); max-width:58ch; margin:0 0 1.25rem }
+.hero .eyebrow{
+  margin:0 0 .4rem; color:var(--brand); font-size:.86rem; font-weight:800;
+  letter-spacing:.08em; text-transform:uppercase;
+}
+.hero .hero-tagline{
+  margin:0 0 .9rem; color:#111; font-size:clamp(1.05rem,2vw,1.28rem); font-weight:650;
+}
+.hero .hero-tagline em{ color:var(--accent); font-style:normal }
 .hero img{
   border-radius:14px; width:100%; max-height:480px; object-fit:cover;
   box-shadow:0 4px 14px rgba(0,0,0,.15); border:4px solid #f4f4f4;
@@ -83,7 +91,7 @@ section.container{
 
 .card{
   background:#fff; border:1px solid rgba(0,71,171,.12); border-radius:16px;
-  padding:1.5rem; display:flex; flex-direction:column; justify-content:space-between; height:100%;
+  padding:1.5rem; display:flex; flex-direction:column; justify-content:flex-start; height:100%;
   box-shadow:0 2px 6px rgba(0,0,0,.04);
   transition:transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1), border-color .3s;
 }
@@ -96,24 +104,59 @@ section.container{
   border-left:3px solid var(--brand); padding-left:.75rem; margin:1rem 0 1.5rem; letter-spacing:.2px;
 }
 
-/* ============ Schedule cards ============ */
+/* ============ Schedule ============ */
 .schedule .muted{ color:var(--muted); margin-top:.25rem }
-.schedule-cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; margin-top:1rem; align-items:stretch }
-@media (max-width:900px){ .schedule-cards{ grid-template-columns:1fr } }
-.sched-card{
-  background:#fff; border:1px solid rgba(0,71,171,.12); border-radius:16px;
-  padding:1.25rem 1.5rem; box-shadow:0 2px 6px rgba(0,0,0,.04);
-  transition:transform .25s, box-shadow .25s, border-color .25s; height:100%; display:flex; flex-direction:column;
+.location-card{
+  display:grid; grid-template-columns:auto 1fr auto; gap:.85rem; align-items:center;
+  margin:1rem 0 1.15rem; padding:1rem 1.1rem; border:1px solid rgba(0,71,171,.16);
+  border-radius:14px; background:#f8fbff; box-shadow:0 2px 6px rgba(0,0,0,.03);
 }
-.sched-card:hover{ transform:translateY(-3px); border-color:rgba(0,71,171,.25); box-shadow:0 8px 20px rgba(0,0,0,.06) }
-.sched-card h3{ margin:.1rem 0 .15rem; font-size:1.1rem; color:#111; font-weight:700; letter-spacing:.2px }
-.sched-card .sub{ margin:0 0 .85rem; color:#666; font-size:.95rem }
-.time-chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:auto }
-.chip{
-  display:inline-flex; align-items:center; padding:.4rem .7rem; border-radius:999px;
-  background:rgba(0,71,171,.08); color:#0f1a2a; font-weight:600; font-size:.95rem; border:1px solid rgba(0,71,171,.18); letter-spacing:.2px;
+.location-icon{ font-size:1.35rem; line-height:1 }
+.location-card strong{ display:block; color:#111 }
+.location-card span{ display:block; color:#666; font-size:.92rem; margin-top:.08rem }
+.location-link{ white-space:nowrap; font-weight:700 }
+.schedule-table-wrap{
+  overflow-x:auto; border:1px solid rgba(0,71,171,.14); border-radius:16px;
+  background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
-.chip:hover{ background:rgba(0,71,171,.12) }
+.schedule-table{ width:100%; min-width:620px; border-collapse:collapse; table-layout:fixed }
+.schedule-table th{
+  padding:1rem .7rem; background:#f5f8fd; color:#0f172a; font-size:1rem;
+  font-weight:800; border-bottom:1px solid rgba(0,71,171,.12); text-align:center;
+}
+.schedule-table td{ padding:1rem .7rem; text-align:center; border-bottom:1px solid #eef2f7 }
+.schedule-table tbody tr:last-child td{ border-bottom:0 }
+.schedule-time{
+  display:inline-flex; align-items:center; justify-content:center; min-width:76px;
+  padding:.45rem .75rem; border-radius:999px; background:rgba(0,71,171,.09);
+  border:1px solid rgba(0,71,171,.2); color:#0f1a2a; font-weight:750; letter-spacing:.02em;
+}
+.schedule-time.secondary{ background:#fff; border-color:rgba(0,71,171,.28); color:var(--brand) }
+.schedule-dash{ color:#94a3b8; font-size:1.35rem; font-weight:700 }
+.schedule-note{
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.45rem .75rem;
+  margin:.9rem 0 0; color:#555; font-size:.93rem; text-align:center;
+}
+.schedule-note-item{ display:inline-flex; align-items:baseline; justify-content:center; gap:.28rem }
+.schedule-note-item strong{ color:#333 }
+.schedule-note-divider{ color:#94a3b8; font-weight:700 }
+.sr-only{
+  position:absolute!important; width:1px!important; height:1px!important; padding:0!important;
+  margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important; border:0!important;
+}
+@media (max-width:700px){
+  .location-card{ grid-template-columns:auto 1fr; }
+  .location-link{ grid-column:2; justify-self:start; white-space:normal }
+  .schedule-table{ min-width:0 }
+  .schedule-table th{ padding:.7rem .18rem; font-size:.8rem }
+  .schedule-table td{ padding:.72rem .12rem }
+  .schedule-time{ min-width:50px; padding:.33rem .2rem; font-size:.78rem }
+  .schedule-dash{ font-size:1rem }
+  .schedule-note{ flex-direction:column; align-items:center; gap:.28rem; text-align:center; font-size:.88rem }
+  .schedule-note-item{ width:100%; flex-wrap:wrap; text-align:center }
+  .schedule-note-divider{ display:none }
+}
 
 /* ============ Gallery ============ */
 .gallery .muted{ color:var(--muted); margin-bottom:.6rem }
@@ -132,7 +175,8 @@ section.container{
   width:100%; display:block; border-bottom:1px solid #f0f0f0; border-radius:12px 12px 0 0;
   object-fit:cover;
 }
-.tile video{ aspect-ratio:16/9; border-bottom:none }
+.tile .thumb img{ aspect-ratio:3/2; object-fit:cover; object-position:center 34% }
+.tile video{ aspect-ratio:4/5; border-bottom:none; background:#111; object-fit:cover }
 
 .tile figcaption{
   padding:.7rem .9rem 1rem; font-size:.95rem; color:#333; line-height:1.45; text-align:center; background:#fff; border-top:1px solid #f3f4f6;
